@@ -2,21 +2,21 @@ version: '3'
 services:
   db:
     image: mysql:5.6
-    container_name: pict-db
+    container_name: trading-db
     environment:
-      MYSQL_DATABASE: pict_development
+      MYSQL_DATABASE: trading_development
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: password
     ports:
-      - '3316:3306'
+      - '3306:3306'
     volumes:
       - ./db/mysql/volumes:/var/lib/mysql
   web:
     build: .
-    container_name: pict-app
+    container_name: trading-app
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
-      - ./myapp:/myapp
+      - ./src:/src
     ports:
       - "3000:3000"
     depends_on:
